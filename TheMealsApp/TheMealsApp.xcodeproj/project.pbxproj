@@ -15,8 +15,6 @@
 		2A49686D251CA41B005DE97A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A49686B251CA41B005DE97A /* LaunchScreen.storyboard */; };
 		2A496878251CA41B005DE97A /* TheMealsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A496877251CA41B005DE97A /* TheMealsAppTests.swift */; };
 		2A496883251CA41C005DE97A /* TheMealsAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A496882251CA41C005DE97A /* TheMealsAppUITests.swift */; };
-		2A49689B251CA62B005DE97A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2A49689A251CA62B005DE97A /* Realm */; };
-		2A49689D251CA62B005DE97A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2A49689C251CA62B005DE97A /* RealmSwift */; };
 		2A4968A3251CA67E005DE97A /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2A4968A2251CA67E005DE97A /* SDWebImageSwiftUI */; };
 		2A4968A8251CA6A4005DE97A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2A4968A7251CA6A4005DE97A /* .swiftlint.yml */; };
 		2A8C15512521976D00D610A9 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C15002521976D00D610A9 /* Injection.swift */; };
@@ -114,8 +112,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A4968A3251CA67E005DE97A /* SDWebImageSwiftUI in Frameworks */,
-				2A49689D251CA62B005DE97A /* RealmSwift in Frameworks */,
-				2A49689B251CA62B005DE97A /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,8 +135,8 @@
 		2A496854251CA417005DE97A = {
 			isa = PBXGroup;
 			children = (
-				2A8C15D42521BAB200D610A9 /* README.md */,
 				2A4968A7251CA6A4005DE97A /* .swiftlint.yml */,
+				2A8C15D42521BAB200D610A9 /* README.md */,
 				2A49685F251CA417005DE97A /* TheMealsApp */,
 				2A496876251CA41B005DE97A /* TheMealsAppTests */,
 				2A496881251CA41C005DE97A /* TheMealsAppUITests */,
@@ -425,8 +421,6 @@
 			);
 			name = TheMealsApp;
 			packageProductDependencies = (
-				2A49689A251CA62B005DE97A /* Realm */,
-				2A49689C251CA62B005DE97A /* RealmSwift */,
 				2A4968A2251CA67E005DE97A /* SDWebImageSwiftUI */,
 			);
 			productName = TheMealsApp;
@@ -950,16 +944,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2A49689A251CA62B005DE97A /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2A496899251CA62B005DE97A /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = Realm;
-		};
-		2A49689C251CA62B005DE97A /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2A496899251CA62B005DE97A /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = RealmSwift;
-		};
 		2A4968A2251CA67E005DE97A /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2A4968A1251CA67E005DE97A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
