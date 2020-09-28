@@ -6,8 +6,6 @@
 //  Copyright © 2020 Dicoding Indonesia. All rights reserved.
 //
 
-import RealmSwift
-
 final class CategoryMapper {
 
   static func mapCategoryResponsesToDomains(

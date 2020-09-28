@@ -63,9 +63,6 @@ extension DetailView {
 
   var content: some View {
     VStack(alignment: .leading, spacing: 0) {
-      headerTitle("Meals from \(self.presenter.category.title)")
-        .padding(.bottom)
-      spacer
       headerTitle("Description")
         .padding([.top, .bottom])
       description
