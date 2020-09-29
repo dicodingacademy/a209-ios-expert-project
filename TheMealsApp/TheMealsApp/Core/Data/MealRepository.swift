@@ -49,18 +49,30 @@ extension MealRepository: MealRepositoryProtocol {
               self.locale.addCategories(from: categoryEntities) { addState in
                 switch addState {
                 case .success(let resultFromAdd):
-                  let resultList = CategoryMapper.mapCategoryEntitiesToDomains(input: resultFromAdd)
-                  result(.success(resultList))
-                case .failure(let error): result(.failure(error))
+                  if resultFromAdd {
+                    self.locale.getCategories { localeResponses in
+                      switch localeResponses {
+                      case .success(let categoryEntity):
+                        let resultList = CategoryMapper.mapCategoryEntitiesToDomains(input: categoryEntity)
+                        result(.success(resultList))
+                      case .failure(let error):
+                        result(.failure(error))
+                      }
+                    }
+                  }
+                case .failure(let error):
+                  result(.failure(error))
                 }
               }
-            case .failure(let error): result(.failure(error))
+            case .failure(let error):
+              result(.failure(error))
             }
           }
         } else {
           result(.success(categoryList))
         }
-      case .failure(let error): result(.failure(error))
+      case .failure(let error):
+        result(.failure(error))
       }
     }
   }

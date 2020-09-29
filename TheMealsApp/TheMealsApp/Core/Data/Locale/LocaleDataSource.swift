@@ -14,7 +14,7 @@ protocol LocaleDataSourceProtocol: class {
   func getCategories(result: @escaping (Result<[CategoryEntity], DatabaseError>) -> Void)
   func addCategories(
     from categories: [CategoryEntity],
-    result: @escaping (Result<[CategoryEntity], DatabaseError>) -> Void
+    result: @escaping (Result<Bool, DatabaseError>) -> Void
   )
 
 }
@@ -51,7 +51,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
 
   func addCategories(
     from categories: [CategoryEntity],
-    result: @escaping (Result<[CategoryEntity], DatabaseError>) -> Void
+    result: @escaping (Result<Bool, DatabaseError>) -> Void
   ) {
     if let realm = realm {
       do {
@@ -59,9 +59,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
           for category in categories {
             realm.add(category, update: .all)
           }
-          getCategories { response in
-            result(response)
-          }
+          result(.success(true))
         }
       } catch {
         result(.failure(.requestFailed))
