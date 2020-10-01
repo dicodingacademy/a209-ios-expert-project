@@ -3,13 +3,16 @@
 //  TheMealsApp
 //
 //  Created by Gilang Ramadhan on 28/09/20.
+//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
 //
 
 import Foundation
+import Combine
 
 protocol DetailUseCase {
 
   func getCategory() -> CategoryModel
+  func getMeals() -> AnyPublisher<[MealModel], Error>
 
 }
 
@@ -30,4 +33,8 @@ class DetailInteractor: DetailUseCase {
     return category
   }
 
+  func getMeals() -> AnyPublisher<[MealModel], Error> {
+    return repository.getMeals(by: category.title)
+  }
+  
 }

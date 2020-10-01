@@ -1,34 +1,34 @@
 //
-//  DetailPresenter.swift
+//  SearchPresenter.swift
 //  MealsApps
 //
-//  Created by Gilang Ramadhan on 13/08/20.
+//  Created by Gilang Ramadhan on 31/08/20.
 //  Copyright © 2020 Dicoding Indonesia. All rights reserved.
 //
 
 import SwiftUI
 import Combine
 
-class DetailPresenter: ObservableObject {
+class SearchPresenter: ObservableObject {
 
   private var cancellables: Set<AnyCancellable> = []
-  private let router = DetailRouter()
-  private let detailUseCase: DetailUseCase
+  private let router = SearchRouter()
+  private let searchUseCase: SearchUseCase
 
   @Published var meals: [MealModel] = []
-  @Published var category: CategoryModel
   @Published var errorMessage: String = ""
   @Published var isLoading: Bool = false
   @Published var isError: Bool = false
 
-  init(detailUseCase: DetailUseCase) {
-    self.detailUseCase = detailUseCase
-    category = detailUseCase.getCategory()
+  var title = ""
+
+  init(searchUseCase: SearchUseCase) {
+    self.searchUseCase = searchUseCase
   }
 
-  func getMeals() {
+  func searchMeal() {
     isLoading = true
-    detailUseCase.getMeals()
+    searchUseCase.searchMeal(by: title)
       .receive(on: RunLoop.main)
       .sink(receiveCompletion: { completion in
         switch completion {

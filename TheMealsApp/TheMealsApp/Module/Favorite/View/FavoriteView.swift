@@ -1,42 +1,40 @@
 //
-//  HomeView.swift
+//  FavoriteView.swift
 //  MealsApps
 //
-//  Created by Gilang Ramadhan on 11/08/20.
+//  Created by Gilang Ramadhan on 24/08/20.
 //  Copyright © 2020 Dicoding Indonesia. All rights reserved.
 //
 
 import SwiftUI
 
-struct HomeView: View {
+struct FavoriteView: View {
 
-  @ObservedObject var presenter: HomePresenter
-  
+  @ObservedObject var presenter: FavoritePresenter
+
   var body: some View {
     ZStack {
+
       if presenter.isLoading {
         loadingIndicator
       } else if presenter.isError {
         errorIndicator
-      } else if presenter.categories.isEmpty {
-        emptyCategories
+      } else if presenter.meals.count == 0 {
+        emptyFavorites
       } else {
         content
       }
     }.onAppear {
-      if self.presenter.categories.count == 0 {
-        self.presenter.getCategories()
-      }
+      self.presenter.getFavoriteMeals()
     }.navigationBarTitle(
-      Text("Meals Apps"),
+      Text("Favorite Meals"),
       displayMode: .automatic
     )
   }
 
 }
 
-extension HomeView {
-
+extension FavoriteView {
   var loadingIndicator: some View {
     VStack {
       Text("Loading...")
@@ -51,26 +49,29 @@ extension HomeView {
     ).offset(y: 80)
   }
 
-  var emptyCategories: some View {
+  var emptyFavorites: some View {
     CustomEmptyView(
       image: "assetNoFavorite",
-      title: "The meal category is empty"
+      title: "Your favorite is empty"
     ).offset(y: 80)
   }
 
   var content: some View {
-    ScrollView(.vertical, showsIndicators: false) {
+    ScrollView(
+      .vertical,
+      showsIndicators: false
+    ) {
       ForEach(
-        self.presenter.categories,
+        self.presenter.meals,
         id: \.id
-      ) { category in
+      ) { meal in
         ZStack {
-          self.presenter.linkBuilder(for: category) {
-            CategoryRow(category: category)
+          self.presenter.linkBuilder(for: meal) {
+            FavoriteRow(meal: meal)
           }.buttonStyle(PlainButtonStyle())
-        }.padding(8)
+        }
+
       }
     }
   }
-
 }
