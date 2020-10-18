@@ -7,9 +7,11 @@
 //
 
 import SwiftUI
+import Category
+import Core
 
 struct ContentView: View {
-  @EnvironmentObject var homePresenter: HomePresenter
+  @EnvironmentObject var homePresenter: GetListPresenter<Any, CategoryDomainModel, Interactor<Any, [CategoryDomainModel], GetCategoriesRepository<GetCategoriesLocaleDataSource, GetCategoriesRemoteDataSource, CategoryTransformer>>>
   @EnvironmentObject var favoritePresenter: FavoritePresenter
   @EnvironmentObject var searchPresenter: SearchPresenter
 

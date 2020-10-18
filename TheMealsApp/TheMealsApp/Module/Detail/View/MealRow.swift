@@ -8,9 +8,10 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Meal
 
 struct MealRow: View {
-  var meal: MealModel
+  var meal: MealDomainModel
 
   var body: some View {
     GeometryReader { geometry in

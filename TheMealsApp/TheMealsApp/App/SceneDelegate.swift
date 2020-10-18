@@ -8,6 +8,8 @@
 import UIKit
 import SwiftUI
 import RealmSwift
+import Core
+import Category
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
@@ -18,11 +20,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     willConnectTo session: UISceneSession,
     options connectionOptions: UIScene.ConnectionOptions
   ) {
-    let homeUseCase = Injection.init().provideHome()
     let favoriteUseCase = Injection.init().provideFavorite()
     let searchUseCase = Injection.init().provideSearch()
 
-    let homePresenter = HomePresenter(homeUseCase: homeUseCase)
+    let categoryUseCase: Interactor<
+        Any,
+        [CategoryDomainModel],
+        GetCategoriesRepository<
+            GetCategoriesLocaleDataSource,
+            GetCategoriesRemoteDataSource,
+            CategoryTransformer>
+    > = Injection.init().provideCategory()
+    
+    let homePresenter = GetListPresenter(useCase: categoryUseCase)
     let favoritePresenter = FavoritePresenter(favoriteUseCase: favoriteUseCase)
     let searchPresenter = SearchPresenter(searchUseCase: searchUseCase)
 

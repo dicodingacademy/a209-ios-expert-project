@@ -33,5 +33,4 @@ enum DatabaseError: LocalizedError {
     case .requestFailed: return "Your request failed."
     }
   }
-
 }
