@@ -11,13 +11,13 @@ public struct MealsTransformer<MealMapper: Mapper>: Mapper
 where
     MealMapper.Request == String,
     MealMapper.Response == MealResponse,
-    MealMapper.Entity == MealModuleEntity,
-    MealMapper.Domain == MealDomainModel {
+    MealMapper.Entity == MealEntity,
+    MealMapper.Domain == MealModel {
     
     public typealias Request = String
     public typealias Response = [MealResponse]
-    public typealias Entity = [MealModuleEntity]
-    public typealias Domain = [MealDomainModel]
+    public typealias Entity = [MealEntity]
+    public typealias Domain = [MealModel]
     
     private let _mealMapper: MealMapper
     
@@ -25,15 +25,15 @@ where
         _mealMapper = mealMapper
     }
     
-    public func transformResponseToEntity(request: String?, response: [MealResponse]) -> [MealModuleEntity] {
+    public func transformResponseToEntity(request: String?, response: [MealResponse]) -> [MealEntity] {
         return response.map { result in
             _mealMapper.transformResponseToEntity(request: request, response: result)
         }
     }
     
-    public func transformEntityToDomain(entity: [MealModuleEntity]) -> [MealDomainModel] {
+    public func transformEntityToDomain(entity: [MealEntity]) -> [MealModel] {
         return entity.map { result in
-            _mealMapper.transformEntityToDomain(entity: result)
+            return _mealMapper.transformEntityToDomain(entity: result)
         }
     }
 }

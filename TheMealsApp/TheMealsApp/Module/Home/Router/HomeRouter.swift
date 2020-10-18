@@ -13,11 +13,11 @@ import Meal
 
 class HomeRouter {
     
-    func makeDetailView(for category: CategoryDomainModel) -> some View {
+    func makeDetailView(for category: CategoryModel) -> some View {
         
         let useCase: Interactor<
             String,
-            [MealDomainModel],
+            [MealModel],
             GetMealsRepository<
                 GetMealsLocaleDataSource,
                 GetMealsRemoteDataSource,

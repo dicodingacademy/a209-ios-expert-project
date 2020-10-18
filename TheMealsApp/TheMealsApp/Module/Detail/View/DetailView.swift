@@ -13,9 +13,9 @@ import Meal
 import Category
 
 struct DetailView: View {
-    @ObservedObject var presenter: GetListPresenter<String, MealDomainModel, Interactor<String, [MealDomainModel], GetMealsRepository<GetMealsLocaleDataSource, GetMealsRemoteDataSource, MealsTransformer<MealTransformer<IngredientTransformer>>>>>
+    @ObservedObject var presenter: GetListPresenter<String, MealModel, Interactor<String, [MealModel], GetMealsRepository<GetMealsLocaleDataSource, GetMealsRemoteDataSource, MealsTransformer<MealTransformer<IngredientTransformer>>>>>
     
-    var category: CategoryDomainModel
+    var category: CategoryModel
     
     var body: some View {
         ZStack {
@@ -74,13 +74,10 @@ extension DetailView {
             HStack {
                 ForEach(self.presenter.list, id: \.id) { meal in
                     ZStack {
-                        MealRow(meal: meal).frame(width: 150, height: 150)
-                        /*
-                        self.presenter.linkBuilder(for: meal) {
+                        self.linkBuilder(for: meal) {
                             MealRow(meal: meal)
                                 .frame(width: 150, height: 150)
                         }.buttonStyle(PlainButtonStyle())
-                        */
                     }
                 }
             }
@@ -109,5 +106,15 @@ extension DetailView {
                 .padding([.top, .bottom])
             description
         }
+    }
+    
+    func linkBuilder<Content: View>(
+        for meal: MealModel,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        
+        NavigationLink(
+            destination: DetailRouter().makeMealView(for: meal)
+        ) { content() }
     }
 }

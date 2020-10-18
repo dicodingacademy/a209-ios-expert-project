@@ -14,7 +14,7 @@ public struct GetCategoriesLocaleDataSource: LocaleDataSource {
     
     public typealias Request = Any
     
-    public typealias Response = CategoryModuleEntity
+    public typealias Response = CategoryEntity
     
     private let _realm: Realm
     
@@ -23,19 +23,19 @@ public struct GetCategoriesLocaleDataSource: LocaleDataSource {
     }
     
     // 1
-    public func list(request: Any?) -> AnyPublisher<[CategoryModuleEntity], Error> {
-        return Future<[CategoryModuleEntity], Error> { completion in
-            let categories: Results<CategoryModuleEntity> = {
-              _realm.objects(CategoryModuleEntity.self)
+    public func list(request: Any?) -> AnyPublisher<[CategoryEntity], Error> {
+        return Future<[CategoryEntity], Error> { completion in
+            let categories: Results<CategoryEntity> = {
+              _realm.objects(CategoryEntity.self)
                 .sorted(byKeyPath: "title", ascending: true)
             }()
-            completion(.success(categories.toArray(ofType: CategoryModuleEntity.self)))
+            completion(.success(categories.toArray(ofType: CategoryEntity.self)))
           
         }.eraseToAnyPublisher()
     }
 
     // 2
-    public func add(entities: [CategoryModuleEntity]) -> AnyPublisher<Bool, Error> {
+    public func add(entities: [CategoryEntity]) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { completion in
             do {
                 try _realm.write {
@@ -52,12 +52,12 @@ public struct GetCategoriesLocaleDataSource: LocaleDataSource {
     }
     
     // 3
-    public func get(id: String) -> AnyPublisher<CategoryModuleEntity, Error> {
+    public func get(id: String) -> AnyPublisher<CategoryEntity, Error> {
         fatalError()
     }
     
     // 4
-    public func update(id: String, entity: CategoryModuleEntity) -> AnyPublisher<Bool, Error> {
+    public func update(id: String, entity: CategoryEntity) -> AnyPublisher<Bool, Error> {
         fatalError()
     }
 }

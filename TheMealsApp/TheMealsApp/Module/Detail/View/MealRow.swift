@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 import Meal
 
 struct MealRow: View {
-  var meal: MealDomainModel
+  var meal: MealModel
 
   var body: some View {
     GeometryReader { geometry in

@@ -12,7 +12,7 @@ import Core
 
 struct HomeView: View {
     
-    @ObservedObject var presenter: GetListPresenter<Any, CategoryDomainModel, Interactor<Any, [CategoryDomainModel], GetCategoriesRepository<GetCategoriesLocaleDataSource, GetCategoriesRemoteDataSource, CategoryTransformer>>>
+    @ObservedObject var presenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], GetCategoriesRepository<GetCategoriesLocaleDataSource, GetCategoriesRemoteDataSource, CategoryTransformer>>>
     
     var body: some View {
         ZStack {
@@ -76,11 +76,12 @@ extension HomeView {
     }
     
     func linkBuilder<Content: View>(
-        for category: CategoryDomainModel,
+        for category: CategoryModel,
         @ViewBuilder content: () -> Content
     ) -> some View {
         
         NavigationLink(
-            destination: HomeRouter().makeDetailView(for: category)) { content() }
+            destination: HomeRouter().makeDetailView(for: category)
+        ) { content() }
     }
 }

@@ -12,7 +12,7 @@ import Category
 
 struct CategoryRow: View {
 
-  var category: CategoryDomainModel
+  var category: CategoryModel
   var body: some View {
     VStack {
       imageCategory
@@ -62,7 +62,7 @@ extension CategoryRow {
 struct CategoryRow_Previews: PreviewProvider {
 
   static var previews: some View {
-    let meal = CategoryDomainModel(
+    let meal = CategoryModel(
       id: "1",
       title: "Beef",
       image: "https://www.themealdb.com/images/category/beef.png",

@@ -15,15 +15,15 @@ public struct GetCategoriesRepository<
     Transformer: Mapper>: Repository
 where
     // 2
-    CategoryLocaleDataSource.Response == CategoryModuleEntity,
+    CategoryLocaleDataSource.Response == CategoryEntity,
     RemoteDataSource.Response == [CategoryResponse],
     Transformer.Response == [CategoryResponse],
-    Transformer.Entity == [CategoryModuleEntity],
-    Transformer.Domain == [CategoryDomainModel] {
+    Transformer.Entity == [CategoryEntity],
+    Transformer.Domain == [CategoryModel] {
   
     // 3
     public typealias Request = Any
-    public typealias Response = [CategoryDomainModel]
+    public typealias Response = [CategoryModel]
     
     private let _localeDataSource: CategoryLocaleDataSource
     private let _remoteDataSource: RemoteDataSource
@@ -40,9 +40,9 @@ where
     }
     
     // 4
-    public func execute(request: Any?) -> AnyPublisher<[CategoryDomainModel], Error> {
+    public func execute(request: Any?) -> AnyPublisher<[CategoryModel], Error> {
         return _localeDataSource.list(request: nil)
-          .flatMap { result -> AnyPublisher<[CategoryDomainModel], Error> in
+          .flatMap { result -> AnyPublisher<[CategoryModel], Error> in
             if result.isEmpty {
               return _remoteDataSource.execute(request: nil)
                 .map { _mapper.transformResponseToEntity(request: nil, response: $0) }

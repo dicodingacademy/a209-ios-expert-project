@@ -14,16 +14,16 @@ public struct GetMealRepository<
     Transformer: Mapper>: Repository
 where
     MealLocaleDataSource.Request == String,
-    MealLocaleDataSource.Response == MealModuleEntity,
+    MealLocaleDataSource.Response == MealEntity,
     RemoteDataSource.Request == String,
     RemoteDataSource.Response == MealResponse,
     Transformer.Request == String,
     Transformer.Response == MealResponse,
-    Transformer.Entity == MealModuleEntity,
-    Transformer.Domain == MealDomainModel {
+    Transformer.Entity == MealEntity,
+    Transformer.Domain == MealModel {
     
     public typealias Request = String
-    public typealias Response = MealDomainModel
+    public typealias Response = MealModel
     
     private let _localeDataSource: MealLocaleDataSource
     private let _remoteDataSource: RemoteDataSource
@@ -39,11 +39,11 @@ where
         _mapper = mapper
     }
     
-    public func execute(request: String?) -> AnyPublisher<MealDomainModel, Error> {
+    public func execute(request: String?) -> AnyPublisher<MealModel, Error> {
         guard let request = request else { fatalError("Request cannot be empty") }
         
         return _localeDataSource.get(id: request)
-          .flatMap { result -> AnyPublisher<MealDomainModel, Error> in
+          .flatMap { result -> AnyPublisher<MealModel, Error> in
             if result.ingredients.isEmpty {
                 return _remoteDataSource.execute(request: request)
                     .map { _mapper.transformResponseToEntity(request: request, response: $0) }

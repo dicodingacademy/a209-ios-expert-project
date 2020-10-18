@@ -13,7 +13,7 @@ import Meal
 
 final class Injection: NSObject {
     
-    func provideCategory<U: UseCase>() -> U where U.Request == Any, U.Response == [CategoryDomainModel] {
+    func provideCategory<U: UseCase>() -> U where U.Request == Any, U.Response == [CategoryModel] {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let locale = GetCategoriesLocaleDataSource(realm: appDelegate.realm)
@@ -30,7 +30,7 @@ final class Injection: NSObject {
         return Interactor(repository: repository) as! U
     }
     
-    func provideMeals<U: UseCase>() -> U where U.Request == String, U.Response == [MealDomainModel] {
+    func provideMeals<U: UseCase>() -> U where U.Request == String, U.Response == [MealModel] {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let locale = GetMealsLocaleDataSource(realm: appDelegate.realm)
@@ -39,7 +39,6 @@ final class Injection: NSObject {
         
         let ingredientMapper = IngredientTransformer()
         let mealMapper = MealTransformer(ingredientMapper: ingredientMapper)
-        
         let mapper = MealsTransformer(mealMapper: mealMapper)
         
         let repository = GetMealsRepository(
@@ -50,38 +49,66 @@ final class Injection: NSObject {
         return Interactor(repository: repository) as! U
     }
     
-    private func provideRepository() -> MealRepositoryProtocol {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-       
-        let locale: LocaleDataSource = LocaleDataSource.sharedInstance(appDelegate.realm)
-        let remote: RemoteDataSource = RemoteDataSource.sharedInstance
+    func provideSearch<U: UseCase>() -> U where U.Request == String, U.Response == [MealModel] {
+        let remote = GetMealsRemoteDataSource(endpoint: Endpoints.Gets.search.url)
         
-        return MealRepository.sharedInstance(locale, remote)
+        let ingredientMapper = IngredientTransformer()
+        let mealMapper = MealTransformer(ingredientMapper: ingredientMapper)
+        let mapper = MealsTransformer(mealMapper: mealMapper)
+        
+        let repository = SearchMealsRepository(
+            remoteDataSource: remote,
+            mapper: mapper)
+        
+        return Interactor(repository: repository) as! U
     }
     
-    func provideHome() -> HomeUseCase {
-        let repository = provideRepository()
-        return HomeInteractor(repository: repository)
+    func provideMeal<U: UseCase>() -> U where U.Request == String, U.Response == MealModel {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let locale = GetMealsLocaleDataSource(realm: appDelegate.realm)
+        
+        let remote = GetMealRemoteDataSource(endpoint: Endpoints.Gets.meal.url)
+        
+        let ingredientMapper = IngredientTransformer()
+        let mapper = MealTransformer(ingredientMapper: ingredientMapper)
+        
+        let repository = GetMealRepository(
+            localeDataSource: locale,
+            remoteDataSource: remote,
+            mapper: mapper)
+        
+        return Interactor(repository: repository) as! U
     }
     
-    func provideDetail(category: CategoryModel) -> DetailUseCase {
-        let repository = provideRepository()
-        return DetailInteractor(repository: repository, category: category)
+    func provideUpdateFavorite<U: UseCase>() -> U where U.Request == String, U.Response == MealModel {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let locale = GetFavoriteMealsLocaleDataSource(realm: appDelegate.realm)
+        
+        let ingredientMapper = IngredientTransformer()
+        let mapper = MealTransformer(ingredientMapper: ingredientMapper)
+        
+        let repository = UpdateFavoriteMealRepository(
+            localeDataSource: locale,
+            mapper: mapper)
+        
+        return Interactor(repository: repository) as! U
     }
     
-    func provideMeal(meal: MealModel) -> MealUseCase {
-        let repository = provideRepository()
-        return MealInteractor(repository: repository, meal: meal)
+    func provideFavorite<U: UseCase>() -> U where U.Request == String, U.Response == [MealModel] {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let locale = GetFavoriteMealsLocaleDataSource(realm: appDelegate.realm)
+        
+        let ingredientMapper = IngredientTransformer()
+        let mealMapper = MealTransformer(ingredientMapper: ingredientMapper)
+        let mapper = MealsTransformer(mealMapper: mealMapper)
+        
+        let repository = GetFavoriteMealsRepository(
+            localeDataSource: locale,
+            mapper: mapper)
+        
+        return Interactor(repository: repository) as! U
     }
-    
-    func provideFavorite() -> FavoriteUseCase {
-        let repository = provideRepository()
-        return FavoriteInteractor(repository: repository)
-    }
-    
-    func provideSearch() -> SearchUseCase {
-        let repository = provideRepository()
-        return SearchInteractor(repository: repository)
-    }
-    
 }

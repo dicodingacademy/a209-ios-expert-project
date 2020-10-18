@@ -12,13 +12,13 @@ public struct MealTransformer<IngredientMapper: Mapper>: Mapper
 where
     IngredientMapper.Request == String,
     IngredientMapper.Response == MealResponse,
-    IngredientMapper.Entity == List<IngredientModuleEntity>,
-    IngredientMapper.Domain == [IngredientDomainModel] {
+    IngredientMapper.Entity == List<IngredientEntity>,
+    IngredientMapper.Domain == [IngredientModel] {
     
     public typealias Request = String
     public typealias Response = MealResponse
-    public typealias Entity = MealModuleEntity
-    public typealias Domain = MealDomainModel
+    public typealias Entity = MealEntity
+    public typealias Domain = MealModel
     
     private let _ingredientMapper: IngredientMapper
     
@@ -26,15 +26,15 @@ where
         _ingredientMapper = ingredientMapper
     }
     
-    public func transformResponseToEntity(request: String?, response: MealResponse) -> MealModuleEntity {
+    public func transformResponseToEntity(request: String?, response: MealResponse) -> MealEntity {
         let ingredients = _ingredientMapper.transformResponseToEntity(request: request, response: response)
         
-        let mealEntity = MealModuleEntity()
+        let mealEntity = MealEntity()
         
         mealEntity.id = response.id ?? ""
         mealEntity.title = response.title ?? "Unknown"
         mealEntity.image = response.image ?? "Unknown"
-        mealEntity.category = response.category ?? "Unknown"
+        mealEntity.category = response.category ?? request ?? "Unknown"
         mealEntity.area = response.area ?? "Unknown"
         mealEntity.instructions = response.instructions ?? "Unknown"
         mealEntity.tag = response.tag ?? "Unknown"
@@ -45,10 +45,10 @@ where
         return mealEntity
     }
     
-    public func transformEntityToDomain(entity: MealModuleEntity) -> MealDomainModel {
+    public func transformEntityToDomain(entity: MealEntity) -> MealModel {
         let ingredients = _ingredientMapper.transformEntityToDomain(entity: entity.ingredients)
         
-        return MealDomainModel(
+        return MealModel(
             id: entity.id ,
             title: entity.title,
             image: entity.image,

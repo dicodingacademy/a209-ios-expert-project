@@ -8,6 +8,8 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Core
+import Meal
 
 struct FavoriteRow: View {
 

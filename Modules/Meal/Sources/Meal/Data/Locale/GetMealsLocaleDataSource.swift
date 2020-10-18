@@ -14,7 +14,7 @@ public struct GetMealsLocaleDataSource : LocaleDataSource {
     
     public typealias Request = String
     
-    public typealias Response = MealModuleEntity
+    public typealias Response = MealEntity
     
     private let _realm: Realm
     
@@ -22,21 +22,22 @@ public struct GetMealsLocaleDataSource : LocaleDataSource {
         _realm = realm
     }
     
-    public func list(request: String?) -> AnyPublisher<[MealModuleEntity], Error> {
-        return Future<[MealModuleEntity], Error> { completion in
+    public func list(request: String?) -> AnyPublisher<[MealEntity], Error> {
+        return Future<[MealEntity], Error> { completion in
             guard let request  = request else { return completion(.failure(DatabaseError.requestFailed)) }
             
-            let meals: Results<MealModuleEntity> = {
-                _realm.objects(MealModuleEntity.self)
+            let meals: Results<MealEntity> = {
+                _realm.objects(MealEntity.self)
                     .filter("category = '\(request)'")
                     .sorted(byKeyPath: "title", ascending: true)
             }()
-            completion(.success(meals.toArray(ofType: MealModuleEntity.self)))
+            
+            completion(.success(meals.toArray(ofType: MealEntity.self)))
             
         }.eraseToAnyPublisher()
     }
     
-    public func add(entities: [MealModuleEntity]) -> AnyPublisher<Bool, Error> {
+    public func add(entities: [MealEntity]) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { completion in
             
             do {
@@ -53,11 +54,11 @@ public struct GetMealsLocaleDataSource : LocaleDataSource {
         }.eraseToAnyPublisher()
     }
     
-    public func get(id: String) -> AnyPublisher<MealModuleEntity, Error> {
-        return Future<MealModuleEntity, Error> { completion in
+    public func get(id: String) -> AnyPublisher<MealEntity, Error> {
+        return Future<MealEntity, Error> { completion in
             
-            let meals: Results<MealModuleEntity> = {
-                _realm.objects(MealModuleEntity.self)
+            let meals: Results<MealEntity> = {
+                _realm.objects(MealEntity.self)
                     .filter("id = '\(id)'")
             }()
             
@@ -71,10 +72,10 @@ public struct GetMealsLocaleDataSource : LocaleDataSource {
         }.eraseToAnyPublisher()
     }
     
-    public func update(id: String, entity: MealModuleEntity) -> AnyPublisher<Bool, Error> {
+    public func update(id: String, entity: MealEntity) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { completion in
             if let mealEntity = {
-                _realm.objects(MealModuleEntity.self).filter("id = '\(id)'")
+                _realm.objects(MealEntity.self).filter("id = '\(id)'")
             }().first {
                 do {
                     try _realm.write {
@@ -96,5 +97,4 @@ public struct GetMealsLocaleDataSource : LocaleDataSource {
             }
         }.eraseToAnyPublisher()
     }
-    
 }

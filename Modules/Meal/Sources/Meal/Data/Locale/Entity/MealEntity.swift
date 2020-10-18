@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-public class MealModuleEntity: Object {
+public class MealEntity: Object {
     
     @objc dynamic var id = ""
     @objc dynamic var title = ""
@@ -21,7 +21,7 @@ public class MealModuleEntity: Object {
     @objc dynamic var source = ""
     @objc dynamic var favorite = false
     
-    var ingredients = List<IngredientModuleEntity>()
+    var ingredients = List<IngredientEntity>()
     
     public override static func primaryKey() -> String? {
         return "id"

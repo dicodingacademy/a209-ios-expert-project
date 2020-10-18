@@ -12,13 +12,13 @@ public struct IngredientTransformer: Mapper {
     
     public typealias Request = String
     public typealias Response = MealResponse
-    public typealias Entity = List<IngredientModuleEntity>
-    public typealias Domain = [IngredientDomainModel]
+    public typealias Entity = List<IngredientEntity>
+    public typealias Domain = [IngredientModel]
     
     public init() { }
     
-    public func transformResponseToEntity(request: String?, response: MealResponse) -> List<IngredientModuleEntity> {
-        let ingredientEntities = List<IngredientModuleEntity>()
+    public func transformResponseToEntity(request: String?, response: MealResponse) -> List<IngredientEntity> {
+        let ingredientEntities = List<IngredientEntity>()
         
         var ingredients = [
             response.ingredient1, response.ingredient2,
@@ -54,7 +54,7 @@ public struct IngredientTransformer: Mapper {
             .map { "\($0) \($1)" }
         
         for (index, ingredient) in ingredientStrings.enumerated() {
-            let ingredientEntity = IngredientModuleEntity()
+            let ingredientEntity = IngredientEntity()
             
             ingredientEntity.id = "\(index+1)"
             ingredientEntity.title = "\(index+1). \(ingredient)"
@@ -65,9 +65,9 @@ public struct IngredientTransformer: Mapper {
         return ingredientEntities
     }
     
-    public func transformEntityToDomain(entity: List<IngredientModuleEntity>) -> [IngredientDomainModel] {
+    public func transformEntityToDomain(entity: List<IngredientEntity>) -> [IngredientModel] {
         return entity.map { result in
-          return IngredientDomainModel(
+          return IngredientModel(
             id: result.id,
             title: result.title,
             idMeal: result.idMeal
