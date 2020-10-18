@@ -12,7 +12,7 @@ import Meal
 
 struct SearchView: View {
     
-    @ObservedObject var presenter: Core.SearchPresenter<MealModel, Interactor<String, [MealModel], SearchMealsRepository<GetMealsRemoteDataSource, MealsTransformer<MealTransformer<IngredientTransformer>>>>>
+    @ObservedObject var presenter: SearchPresenter<MealModel, Interactor<String, [MealModel], SearchMealsRepository<GetMealsRemoteDataSource, MealsTransformer<MealTransformer<IngredientTransformer>>>>>
     
     var body: some View {
         VStack {

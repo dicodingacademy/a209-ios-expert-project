@@ -31,7 +31,7 @@ class DetailRouter {
                 MealTransformer<IngredientTransformer>>
         > = Injection.init().provideUpdateFavorite()
         
-        let presenter = Meal.MealPresenter(mealUseCase: useCase, favoriteUseCase: favoriteUseCase)
+        let presenter = MealPresenter(mealUseCase: useCase, favoriteUseCase: favoriteUseCase)
         
         return MealView(presenter: presenter, meal: meal)
     }

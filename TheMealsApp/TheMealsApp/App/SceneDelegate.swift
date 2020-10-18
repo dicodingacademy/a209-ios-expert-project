@@ -50,7 +50,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let homePresenter = GetListPresenter(useCase: categoryUseCase)
         let favoritePresenter = GetListPresenter(useCase: favoriteUseCase)
-        let searchPresenter = Core.SearchPresenter(useCase: searchUseCase)
+        let searchPresenter = SearchPresenter(useCase: searchUseCase)
         
         let contentView = ContentView()
             .environmentObject(homePresenter)

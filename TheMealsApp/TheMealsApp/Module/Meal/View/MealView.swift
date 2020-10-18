@@ -15,7 +15,7 @@ struct MealView: View {
     
     @State private var showingAlert = false
     
-    @ObservedObject var presenter: Meal.MealPresenter<
+    @ObservedObject var presenter: MealPresenter<
         Interactor<String, MealModel, GetMealRepository<GetMealsLocaleDataSource, GetMealRemoteDataSource, MealTransformer<IngredientTransformer>>>,
         Interactor<String, MealModel, UpdateFavoriteMealRepository<GetFavoriteMealsLocaleDataSource, MealTransformer<IngredientTransformer>>>
     >
