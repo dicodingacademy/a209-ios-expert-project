@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-public class IngredientModuleEntity: Object {
+public class IngredientEntity: Object {
     
     @objc dynamic var id: String = ""
     @objc dynamic var title: String = ""

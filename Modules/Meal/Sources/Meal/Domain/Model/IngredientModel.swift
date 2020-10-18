@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct IngredientDomainModel: Equatable, Identifiable {
+public struct IngredientModel: Equatable, Identifiable {
     
     public let id: String
     public let title: String

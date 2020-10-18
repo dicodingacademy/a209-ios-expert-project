@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-public class CategoryModuleEntity: Object {
+public class CategoryEntity: Object {
     
     @objc dynamic var id: String = ""
     @objc dynamic var title: String = ""
