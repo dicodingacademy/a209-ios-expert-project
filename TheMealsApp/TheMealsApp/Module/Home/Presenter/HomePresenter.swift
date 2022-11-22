@@ -1,9 +1,8 @@
 //
 //  HomePresenter.swift
-//  MealsApps
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 11/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import SwiftUI
@@ -16,11 +15,11 @@ class HomePresenter: ObservableObject {
   @Published var categories: [CategoryModel] = []
   @Published var errorMessage: String = ""
   @Published var loadingState: Bool = false
-  
+
   init(homeUseCase: HomeUseCase) {
     self.homeUseCase = homeUseCase
   }
-  
+
   func getCategories() {
     loadingState = true
     homeUseCase.getCategories { result in
@@ -38,7 +37,7 @@ class HomePresenter: ObservableObject {
       }
     }
   }
-  
+
   func linkBuilder<Content: View>(
     for category: CategoryModel,
     @ViewBuilder content: () -> Content
