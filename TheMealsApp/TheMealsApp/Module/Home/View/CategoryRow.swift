@@ -1,13 +1,11 @@
 //
-//  HomeRow.swift
-//  MealsApps
+//  CategoryRow.swift
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 11/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 struct CategoryRow: View {
 
@@ -27,22 +25,19 @@ struct CategoryRow: View {
 extension CategoryRow {
 
   var imageCategory: some View {
-    WebImage(url: URL(string: category.image))
-      .resizable()
-      .indicator(.activity)
-      .transition(.fade(duration: 0.5))
-      .scaledToFit()
-      .frame(width: 200)
-      .cornerRadius(30)
-      .padding(.top)
+    AsyncImage(url: URL(string: category.image)) { image in
+      image.resizable()
+    } placeholder: {
+      ProgressView()
+    }.cornerRadius(30).scaledToFit().frame(width: 200).padding(.top)
   }
-  
+
   var content: some View {
     VStack(alignment: .leading, spacing: 10) {
       Text(category.title)
         .font(.title)
         .bold()
-      
+
       Text(category.description)
         .font(.system(size: 14))
         .lineLimit(2)
