@@ -1,9 +1,8 @@
 //
-//  MealsRepository.swift
-//  MealsApps
+//  MealRepository.swift
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 11/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import Foundation
@@ -36,18 +35,16 @@ final class MealRepository: NSObject {
 extension MealRepository: MealRepositoryProtocol {
 
   func getCategories() -> Observable<[CategoryModel]> {
-
     return self.locale.getCategories()
       .map { CategoryMapper.mapCategoryEntitiesToDomains(input: $0) }
       .filter { !$0.isEmpty }
       .ifEmpty(switchTo: self.remote.getCategories()
-                .map { CategoryMapper.mapCategoryResponsesToEntities(input: $0) }
-                .flatMap { self.locale.addCategories(from: $0) }
-                .filter { $0 }
-                .flatMap { _ in self.locale.getCategories()
-                  .map { CategoryMapper.mapCategoryEntitiesToDomains(input: $0) }
-                }
+        .map { CategoryMapper.mapCategoryResponsesToEntities(input: $0) }
+        .flatMap { self.locale.addCategories(from: $0) }
+        .filter { $0 }
+        .flatMap { _ in self.locale.getCategories()
+            .map { CategoryMapper.mapCategoryEntitiesToDomains(input: $0) }
+        }
       )
-
   }
 }

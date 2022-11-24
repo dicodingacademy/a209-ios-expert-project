@@ -1,10 +1,10 @@
 //
-//  Color+Extension.swift
-//  MealsApps
+//  Color+Ext.swift
+//  TheMealsApp
 //
-//  Created by Ari Supriatna on 19/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
+
 import SwiftUI
 
 extension Color {
@@ -16,5 +16,5 @@ extension Color {
       blue: .random(in: 0...1)
     )
   }
-  
+
 }

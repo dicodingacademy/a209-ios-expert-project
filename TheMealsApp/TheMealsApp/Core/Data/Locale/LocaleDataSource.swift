@@ -1,16 +1,15 @@
 //
-//  LocaleDataSource.swift
+//  LocaleDataStore.swift
 //  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 28/09/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import Foundation
 import RealmSwift
 import RxSwift
 
-protocol LocaleDataSourceProtocol: class {
+protocol LocaleDataSourceProtocol: AnyObject {
 
   func getCategories() -> Observable<[CategoryEntity]>
   func addCategories(from categories: [CategoryEntity]) -> Observable<Bool>
@@ -23,7 +22,6 @@ final class LocaleDataSource: NSObject {
 
   private init(realm: Realm?) {
     self.realm = realm
-
   }
 
   static let sharedInstance: (Realm?) -> LocaleDataSource = { realmDatabase in
@@ -72,7 +70,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
     }
 
   }
-  
+
 }
 
 extension Results {

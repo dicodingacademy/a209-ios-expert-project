@@ -1,19 +1,18 @@
 //
-//  RemoteRepository.swift
-//  MealsApps
+//  RemoteDataSource.swift
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 11/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import Foundation
 import Alamofire
 import RxSwift
 
-protocol RemoteDataSourceProtocol: class {
+protocol RemoteDataSourceProtocol: AnyObject {
 
   func getCategories() -> Observable<[CategoryResponse]>
-  
+
 }
 
 final class RemoteDataSource: NSObject {
@@ -43,7 +42,6 @@ extension RemoteDataSource: RemoteDataSourceProtocol {
       }
       return Disposables.create()
     }
-
   }
 
 }
