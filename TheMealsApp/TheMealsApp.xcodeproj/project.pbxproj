@@ -31,7 +31,7 @@
 		2A9D4572292C8620008FABEB /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D4571292C8620008FABEB /* DetailView.swift */; };
 		2AC96394292CB18A0061B65A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2AC96393292CB18A0061B65A /* Realm */; };
 		2AC96396292CB18A0061B65A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2AC96395292CB18A0061B65A /* RealmSwift */; };
-		2AC96399292CB25E0061B65A /* LocaleDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC96398292CB25E0061B65A /* LocaleDataStore.swift */; };
+		2AC96399292CB25E0061B65A /* LocaleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC96398292CB25E0061B65A /* LocaleDataSource.swift */; };
 		2AC9639B292CB2770061B65A /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC9639A292CB2770061B65A /* CategoryEntity.swift */; };
 		2AC9639F292CB8270061B65A /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2AC9639E292CB8270061B65A /* CachedAsyncImage */; };
 /* End PBXBuildFile section */
@@ -59,7 +59,7 @@
 		2A9D456B292C8577008FABEB /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		2A9D456F292C8604008FABEB /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		2A9D4571292C8620008FABEB /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
-		2AC96398292CB25E0061B65A /* LocaleDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleDataStore.swift; sourceTree = "<group>"; };
+		2AC96398292CB25E0061B65A /* LocaleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleDataSource.swift; sourceTree = "<group>"; };
 		2AC9639A292CB2770061B65A /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -303,7 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				2AC9639C292CB27B0061B65A /* Entity */,
-				2AC96398292CB25E0061B65A /* LocaleDataStore.swift */,
+				2AC96398292CB25E0061B65A /* LocaleDataSource.swift */,
 			);
 			path = Locale;
 			sourceTree = "<group>";
@@ -412,7 +412,7 @@
 				2A9D454E292C81B1008FABEB /* Injection.swift in Sources */,
 				2A9D455F292C828E008FABEB /* CustomeError+Ext.swift in Sources */,
 				2A9D4551292C81DD008FABEB /* CategoryModel.swift in Sources */,
-				2AC96399292CB25E0061B65A /* LocaleDataStore.swift in Sources */,
+				2AC96399292CB25E0061B65A /* LocaleDataSource.swift in Sources */,
 				2AC9639B292CB2770061B65A /* CategoryEntity.swift in Sources */,
 				2A9D455D292C8272008FABEB /* CategoryMapper.swift in Sources */,
 				2A9D454C292C819A008FABEB /* MealRepository.swift in Sources */,
