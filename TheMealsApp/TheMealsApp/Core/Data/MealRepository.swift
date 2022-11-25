@@ -1,9 +1,8 @@
 //
-//  MealsRepository.swift
-//  MealsApps
+//  MealRepository.swift
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 11/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import Foundation
@@ -36,7 +35,6 @@ final class MealRepository: NSObject {
 extension MealRepository: MealRepositoryProtocol {
 
   func getCategories() -> AnyPublisher<[CategoryModel], Error> {
-
     return self.locale.getCategories()
       .flatMap { result -> AnyPublisher<[CategoryModel], Error> in
         if result.isEmpty {
@@ -54,6 +52,6 @@ extension MealRepository: MealRepositoryProtocol {
             .eraseToAnyPublisher()
         }
       }.eraseToAnyPublisher()
-
   }
+
 }
