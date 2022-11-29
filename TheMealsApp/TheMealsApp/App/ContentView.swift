@@ -2,8 +2,7 @@
 //  ContentView.swift
 //  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 24/09/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import SwiftUI
@@ -15,19 +14,19 @@ struct ContentView: View {
 
   var body: some View {
     TabView {
-      NavigationView {
+      NavigationStack {
         HomeView(presenter: homePresenter)
       }.tabItem {
         TabItem(imageName: "house", title: "Home")
       }
 
-      NavigationView {
+      NavigationStack {
         SearchView(presenter: searchPresenter)
       }.tabItem {
         TabItem(imageName: "magnifyingglass", title: "Search")
       }
 
-      NavigationView {
+      NavigationStack {
         FavoriteView(presenter: favoritePresenter)
       }.tabItem {
         TabItem(imageName: "heart", title: "Favorite")

@@ -1,9 +1,8 @@
 //
-//  Category.swift
-//  MealsApps
+//  CategoryModel.swift
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 11/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import Foundation
@@ -14,5 +13,5 @@ struct CategoryModel: Equatable, Identifiable {
   let title: String
   let image: String
   let description: String
-  
+
 }

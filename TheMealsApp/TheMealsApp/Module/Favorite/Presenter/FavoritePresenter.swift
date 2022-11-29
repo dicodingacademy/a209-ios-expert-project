@@ -1,9 +1,8 @@
 //
 //  FavoritePresenter.swift
-//  MealsApps
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 24/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 29/11/22.
 //
 
 import SwiftUI
@@ -46,8 +45,7 @@ class FavoritePresenter: ObservableObject {
     for meal: MealModel,
     @ViewBuilder content: () -> Content
   ) -> some View {
-    NavigationLink(
-    destination: router.makeMealView(for: meal)) { content() }
+    NavigationLink(destination: router.makeMealView(for: meal)) { content() }
   }
-  
+
 }

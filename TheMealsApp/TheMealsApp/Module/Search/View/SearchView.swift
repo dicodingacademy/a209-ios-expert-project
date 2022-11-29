@@ -1,24 +1,19 @@
 //
-//  ProfileView.swift
-//  MealsApps
+//  SearchView.swift
+//  TheMealsApp
 //
-//  Created by Ari Supriatna on 25/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 29/11/22.
 //
 
 import SwiftUI
 
 struct SearchView: View {
-  
+
   @ObservedObject var presenter: SearchPresenter
-  
+
   var body: some View {
     VStack {
-      SearchBar(
-        text: $presenter.title,
-        onSearchButtonClicked: presenter.searchMeal
-      )
-      
+      Spacer()
       ZStack {
         if presenter.isLoading {
           loadingIndicator
@@ -42,7 +37,8 @@ struct SearchView: View {
             }
           }
         }
-      }
+      }.searchable(text: $presenter.title)
+        .onSubmit(of: .search, presenter.searchMeal)
       Spacer()
     }.navigationBarTitle(
       Text("Search Meals"),
@@ -52,21 +48,21 @@ struct SearchView: View {
 }
 
 extension SearchView {
-  
+
   var loadingIndicator: some View {
     VStack {
       Text("Loading...")
-      ActivityIndicator()
+      ProgressView()
     }
   }
-  
+
   var errorIndicator: some View {
     CustomEmptyView(
       image: "assetSearchNotFound",
       title: presenter.errorMessage
     ).offset(y: 80)
   }
-  
+
   var emptyTitle: some View {
     CustomEmptyView(
       image: "assetSearchMeal",
@@ -79,5 +75,5 @@ extension SearchView {
       title: "Data not found"
     ).offset(y: 80)
   }
-  
+
 }

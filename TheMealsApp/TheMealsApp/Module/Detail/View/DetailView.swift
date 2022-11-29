@@ -1,13 +1,12 @@
 //
-//  DetailView.swift
-//  MealsApps
+//  File.swift
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 13/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
+import CachedAsyncImage
 
 struct DetailView: View {
   @ObservedObject var presenter: DetailPresenter
@@ -44,7 +43,7 @@ extension DetailView {
   var loadingIndicator: some View {
     VStack {
       Text("Loading...")
-      ActivityIndicator()
+      ProgressView()
     }
   }
 
@@ -56,12 +55,11 @@ extension DetailView {
   }
 
   var imageCategory: some View {
-    WebImage(url: URL(string: self.presenter.category.image))
-      .resizable()
-      .indicator(.activity)
-      .transition(.fade(duration: 0.5))
-      .scaledToFit()
-      .frame(width: 250.0, height: 250.0, alignment: .center)
+    CachedAsyncImage(url: URL(string: self.presenter.category.image)) { image in
+      image.resizable()
+    } placeholder: {
+      ProgressView()
+    }.scaledToFit().frame(width: 250.0, height: 250.0, alignment: .center)
   }
 
   var mealsHorizontal: some View {

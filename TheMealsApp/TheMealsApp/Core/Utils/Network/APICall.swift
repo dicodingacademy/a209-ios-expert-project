@@ -1,9 +1,8 @@
 //
-//  Endpoints.swift
-//  MealsApps
+//  APICall.swift
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 11/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import Foundation
@@ -21,13 +20,13 @@ protocol Endpoint {
 }
 
 enum Endpoints {
-  
+
   enum Gets: Endpoint {
     case categories
     case meals
     case meal
     case search
-    
+
     public var url: String {
       switch self {
       case .categories: return "\(API.baseUrl)categories.php"
@@ -37,5 +36,5 @@ enum Endpoints {
       }
     }
   }
-  
+
 }

@@ -1,6 +1,6 @@
 //
 //  CustomIcon.swift
-//  MealsApps
+//  TheMealsApp
 //
 //  Created by Ari Supriatna on 19/08/20.
 //  Copyright © 2020 Dicoding Indonesia. All rights reserved.
@@ -24,5 +24,5 @@ struct CustomIcon: View {
         .padding(.top, 8)
     }
   }
-  
+
 }

@@ -1,9 +1,8 @@
 //
 //  HomeView.swift
-//  MealsApps
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 11/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import SwiftUI
@@ -11,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
 
   @ObservedObject var presenter: HomePresenter
-  
+
   var body: some View {
     ZStack {
       if presenter.isLoading {
@@ -40,7 +39,7 @@ extension HomeView {
   var loadingIndicator: some View {
     VStack {
       Text("Loading...")
-      ActivityIndicator()
+      ProgressView()
     }
   }
 

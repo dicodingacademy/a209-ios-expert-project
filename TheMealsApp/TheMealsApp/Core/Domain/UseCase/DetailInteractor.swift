@@ -1,9 +1,8 @@
 //
-//  DetailUseCase.swift
+//  DetailInteractor.swift
 //  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 28/09/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import Foundation
@@ -36,5 +35,5 @@ class DetailInteractor: DetailUseCase {
   func getMeals() -> AnyPublisher<[MealModel], Error> {
     return repository.getMeals(by: category.title)
   }
-  
+
 }
