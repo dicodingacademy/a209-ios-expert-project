@@ -2,12 +2,12 @@
 //  MealRow.swift
 //  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 01/10/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 29/11/22.
 //
 
+import Foundation
 import SwiftUI
-import SDWebImageSwiftUI
+import CachedAsyncImage
 
 struct MealRow: View {
   var meal: MealModel
@@ -21,11 +21,11 @@ struct MealRow: View {
             height: geometry.size.height,
             alignment: .center
         )
-        self.blurView
-          .frame(
-            width: geometry.size.width,
-            height: 32
-        )
+        EmptyView().frame(
+          width: geometry.size.width,
+          height: 32
+        ).blur(radius: 20)
+
         self.titleMeal
       }
     }.cornerRadius(12)
@@ -33,16 +33,13 @@ struct MealRow: View {
 }
 
 extension MealRow {
-  var blurView: some View {
-    BlurView()
-  }
 
   var imageMeal: some View {
-    WebImage(url: URL(string: self.meal.image))
-      .resizable()
-      .indicator(.activity)
-      .transition(.fade(duration: 0.5))
-      .scaledToFit()
+    CachedAsyncImage(url: URL(string: self.meal.image)) { image in
+      image.resizable()
+    } placeholder: {
+      ProgressView()
+    }.scaledToFit()
   }
 
   var titleMeal: some View {

@@ -1,9 +1,8 @@
 //
 //  SearchRouter.swift
-//  MealsApps
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 31/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 29/11/22.
 //
 
 import SwiftUI

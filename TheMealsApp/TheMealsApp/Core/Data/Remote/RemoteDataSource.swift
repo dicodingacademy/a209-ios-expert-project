@@ -1,16 +1,15 @@
 //
-//  RemoteRepository.swift
-//  MealsApps
+//  RemoteDataSource.swift
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 11/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import Foundation
 import Alamofire
 import Combine
 
-protocol RemoteDataSourceProtocol: class {
+protocol RemoteDataSourceProtocol: AnyObject {
 
   func getCategories() -> AnyPublisher<[CategoryResponse], Error>
   func getMeal(by id: String) -> AnyPublisher<MealResponse, Error>
@@ -64,7 +63,7 @@ extension RemoteDataSource: RemoteDataSourceProtocol {
       }
     }.eraseToAnyPublisher()
   }
-  
+
   func getMeals(
     by category: String
   ) -> AnyPublisher<[MealResponse], Error> {

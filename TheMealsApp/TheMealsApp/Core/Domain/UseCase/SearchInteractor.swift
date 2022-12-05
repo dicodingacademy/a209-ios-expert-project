@@ -2,8 +2,7 @@
 //  SearchInteractor.swift
 //  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 01/10/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 29/11/22.
 //
 
 import Foundation

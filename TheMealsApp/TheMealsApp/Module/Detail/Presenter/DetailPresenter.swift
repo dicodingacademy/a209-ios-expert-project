@@ -1,9 +1,8 @@
 //
 //  DetailPresenter.swift
-//  MealsApps
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 13/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import SwiftUI
@@ -49,8 +48,7 @@ class DetailPresenter: ObservableObject {
     for meal: MealModel,
     @ViewBuilder content: () -> Content
   ) -> some View {
-    NavigationLink(
-      destination: router.makeMealView(for: meal)) { content() }
+    NavigationLink(destination: router.makeMealView(for: meal)) { content() }
   }
 
 }

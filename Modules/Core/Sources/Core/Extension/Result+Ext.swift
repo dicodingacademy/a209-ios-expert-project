@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  Result+Ext.swift
 //  
 //
-//  Created by Fandy Gotama on 19/10/20.
+//  Created by Gilang Ramadhan on 01/12/22.
 //
 
 import RealmSwift

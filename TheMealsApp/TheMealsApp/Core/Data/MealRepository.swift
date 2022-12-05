@@ -1,16 +1,15 @@
 //
-//  MealsRepository.swift
-//  MealsApps
+//  MealRepository.swift
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 11/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import Foundation
 import Combine
 
 protocol MealRepositoryProtocol {
-  
+
   func getCategories() -> AnyPublisher<[CategoryModel], Error>
   func getMeal(by idMeal: String) -> AnyPublisher<MealModel, Error>
   func getMeals(by category: String) -> AnyPublisher<[MealModel], Error>
@@ -20,25 +19,25 @@ protocol MealRepositoryProtocol {
 }
 
 final class MealRepository: NSObject {
-  
+
   typealias MealInstance = (LocaleDataSource, RemoteDataSource) -> MealRepository
-  
+
   fileprivate let remote: RemoteDataSource
   fileprivate let locale: LocaleDataSource
-  
+
   private init(locale: LocaleDataSource, remote: RemoteDataSource) {
     self.locale = locale
     self.remote = remote
   }
-  
+
   static let sharedInstance: MealInstance = { localeRepo, remoteRepo in
     return MealRepository(locale: localeRepo, remote: remoteRepo)
   }
-  
+
 }
 
 extension MealRepository: MealRepositoryProtocol {
-  
+
   func getCategories() -> AnyPublisher<[CategoryModel], Error> {
     return self.locale.getCategories()
       .flatMap { result -> AnyPublisher<[CategoryModel], Error> in
@@ -127,13 +126,13 @@ extension MealRepository: MealRepositoryProtocol {
           }
       }.eraseToAnyPublisher()
   }
-  
+
   func getFavoriteMeals() -> AnyPublisher<[MealModel], Error> {
     return self.locale.getFavoriteMeals()
       .map { MealMapper.mapMealEntitiesToDomains(input: $0) }
       .eraseToAnyPublisher()
   }
-  
+
   func updateFavoriteMeal(
     by idMeal: String
   ) -> AnyPublisher<MealModel, Error> {
@@ -141,5 +140,5 @@ extension MealRepository: MealRepositoryProtocol {
       .map { MealMapper.mapDetailMealEntityToDomain(input: $0) }
       .eraseToAnyPublisher()
   }
-  
+
 }

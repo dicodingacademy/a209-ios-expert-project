@@ -2,15 +2,14 @@
 //  Repository.swift
 //  
 //
-//  Created by Fandy Gotama on 19/10/20.
+//  Created by Gilang Ramadhan on 01/12/22.
 //
 
-import Foundation
 import Combine
 
 public protocol Repository {
-    associatedtype Request
-    associatedtype Response
-    
-    func execute(request: Request?) -> AnyPublisher<Response, Error>
+  associatedtype Request
+  associatedtype Response
+  
+  func execute(request: Request?) -> AnyPublisher<Response, Error>
 }
