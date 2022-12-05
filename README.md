@@ -2,7 +2,7 @@
 
 Silakan lihat branch untuk berkas atau source code yang diinginkan.
 
-##Versi SwiftUI 1
+## Versi SwiftUI 1
 master : starter project  
 ├101-alamofire\
 └102-realm-database\
@@ -12,7 +12,7 @@ master : starter project
 &nbsp; &nbsp; &nbsp; &nbsp;├301-category-modularization\
 &nbsp; &nbsp; &nbsp; &nbsp;└302-modularization
 
-##Versi SwiftUI 4
+## Versi SwiftUI 4
 - 001-starter-project\
 - 002-mengganti-urlsession-dengan-alamofire\
 - 003-menambahkan-locale-database\
