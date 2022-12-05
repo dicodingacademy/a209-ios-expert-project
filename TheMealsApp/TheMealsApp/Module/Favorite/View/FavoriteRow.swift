@@ -1,13 +1,12 @@
 //
 //  FavoriteRow.swift
-//  MealsApps
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 24/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 29/11/22.
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
+import CachedAsyncImage
 import Core
 import Meal
 
@@ -35,13 +34,11 @@ struct FavoriteRow: View {
 extension FavoriteRow {
 
   var imageCategory: some View {
-    WebImage(url: URL(string: meal.image))
-      .resizable()
-      .indicator(.activity)
-      .transition(.fade(duration: 0.5))
-      .scaledToFit()
-      .frame(width: 120)
-      .cornerRadius(20)
+    CachedAsyncImage(url: URL(string: meal.image)) { image in
+      image.resizable()
+    } placeholder: {
+      ProgressView()
+    }.cornerRadius(20).scaledToFit().frame(width: 120)
   }
 
   var content: some View {

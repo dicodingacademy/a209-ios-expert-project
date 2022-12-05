@@ -1,9 +1,8 @@
 //
 //  HomeRouter.swift
-//  MealsApps
+//  TheMealsApp
 //
-//  Created by Gilang Ramadhan on 12/08/20.
-//  Copyright © 2020 Dicoding Indonesia. All rights reserved.
+//  Created by Gilang Ramadhan on 22/11/22.
 //
 
 import SwiftUI
@@ -12,21 +11,21 @@ import Core
 import Meal
 
 class HomeRouter {
-    
-    func makeDetailView(for category: CategoryModel) -> some View {
-        
-        let useCase: Interactor<
-            String,
-            [MealModel],
-            GetMealsRepository<
-                GetMealsLocaleDataSource,
-                GetMealsRemoteDataSource,
-                MealsTransformer<MealTransformer<IngredientTransformer>>>
-        > = Injection.init().provideMeals()
-        
-        let presenter = GetListPresenter(useCase: useCase)
-        
-        return DetailView(presenter: presenter, category: category)
-    }
-    
+
+  func makeDetailView(for category: CategoryModel) -> some View {
+
+    let useCase: Interactor<
+      String,
+      [MealModel],
+      GetMealsRepository<
+        GetMealsLocaleDataSource,
+        GetMealsRemoteDataSource,
+        MealsTransformer<MealTransformer<IngredientTransformer>>>
+    > = Injection.init().provideMeals()
+
+    let presenter = GetListPresenter(useCase: useCase)
+
+    return DetailView(presenter: presenter, category: category)
+  }
+
 }

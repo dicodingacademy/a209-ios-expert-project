@@ -1,13 +1,14 @@
 //
-//  DataSource.swift
+//  Usecase.swift
 //  
 //
 //  Created by Gilang Ramadhan on 01/12/22.
 //
 
+import Foundation
 import Combine
 
-public protocol DataSource {
+public protocol UseCase {
   associatedtype Request
   associatedtype Response
   
