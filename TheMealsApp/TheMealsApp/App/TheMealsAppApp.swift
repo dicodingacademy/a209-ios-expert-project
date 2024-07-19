@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct TheMealsAppApp: App {
-  let homePresenter = HomePresenter(homeUseCase: Injection.init().provideHome())
+  let homePresenter = HomePresenter(homeUseCase: Injection.shared.provideHome())
 
   var body: some Scene {
     WindowGroup {

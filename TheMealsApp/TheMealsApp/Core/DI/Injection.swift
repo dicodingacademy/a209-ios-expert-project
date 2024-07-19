@@ -7,26 +7,53 @@
 
 import Foundation
 import RealmSwift
+import Swinject
 
-final class Injection: NSObject {
+final class Injection {
+  
+  static let shared = Injection()
 
-  private func provideRepository() -> MealRepositoryProtocol {
-    let realm = try? Realm()
+  let container: Container
 
-    let locale: LocaleDataSource = LocaleDataSource.sharedInstance(realm)
-    let remote: RemoteDataSource = RemoteDataSource.sharedInstance
+  private init() {
+    container = Container()
 
-    return MealRepository.sharedInstance(locale, remote)
+    container.register(Realm.self) { _ in
+      try! Realm()
+    }
+
+    container.register(LocaleDataSource.self) { resolver in
+      let realm = resolver.resolve(Realm.self)
+      return LocaleDataSource.sharedInstance(realm)
+    }
+
+    container.register(RemoteDataSource.self) { resolver in
+      return RemoteDataSource.sharedInstance
+    }
+
+    container.register(MealRepositoryProtocol.self) { resolver in
+      let locale = resolver.resolve(LocaleDataSource.self)!
+      let remote = resolver.resolve(RemoteDataSource.self)!
+      return MealRepository.sharedInstance(locale, remote)
+    }
+
+    container.register(HomeUseCase.self) { resolver in
+      let repository = resolver.resolve(MealRepositoryProtocol.self)!
+      return HomeInteractor(repository: repository)
+    }
+
+    container.register(DetailUseCase.self) { (resolver, category: CategoryModel) in
+      let repository = resolver.resolve(MealRepositoryProtocol.self)!
+      return DetailInteractor(repository: repository, category: category)
+    }
   }
 
   func provideHome() -> HomeUseCase {
-    let repository = provideRepository()
-    return HomeInteractor(repository: repository)
+    return container.resolve(HomeUseCase.self)!
   }
 
   func provideDetail(category: CategoryModel) -> DetailUseCase {
-    let repository = provideRepository()
-    return DetailInteractor(repository: repository, category: category)
+    return container.resolve(DetailUseCase.self, argument: category)!
   }
 
 }
